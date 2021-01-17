@@ -24,7 +24,7 @@ function voteimage(nameproduct, filepath){
 this.nameproduct = nameproduct;
 this.filepath = filepath;
 this.click = 0;
-this.timesshown = 0;
+// this.timesshown = 0;
 
 voteimage.prototype.allimages.push(this);
 }
@@ -72,27 +72,32 @@ function calcclick (event){
 usercounter++;
 
  if (usercounter <= maxclick){
-     if(event.target === 'left-image'){
+     if(event.target.id === 'left-image'){
         voteimage.prototype.allimages[leftImageindex].click++;
      }else{
     voteimage.prototype.allimages[mediumImageindex].click++;
 }
-if(event.target === 'medium-image'){
+if(event.target.id === 'medium-image'){
 voteimage.prototype.allimages[mediumImageindex].click++;   
 }else{
     voteimage.prototype.allimages[rightImageindex].click++;
 }
-}
 
-
-
- 
 renderthreerandomimages();
 
-
+}
 
 else{
-
+var clicklist = document.getElementById('click-list');
+var clickres;
+for(var i = 0; i < voteimage.prototype.allimages.length; i++) {
+ clickres = document.createElement('li');
+ clickres.textContent = voteimage.prototype.allimages[i].nameproduct + 'was chosen ' + voteimage.prototype.allimages[i].click + 'times '; 
+ clicklist.appendChild(clickres);
+}
+rightImageElement.removeEventListener('click',calcclick);
+leftImageElement.removeEventListener('click',calcclick);
+mediumImageElement.removeEventListener('click',calcclick);
  }
 
 
@@ -115,9 +120,6 @@ do{
 
 //////////////
 
-
-
-
 leftImageElement.src = voteimage.prototype.allimages[leftImageindex].filepath;
 
 mediumImageElement.src = voteimage.prototype.allimages[mediumImageindex].filepath;
@@ -126,6 +128,10 @@ rightImageElement.src = voteimage.prototype.allimages[rightImageindex].filepath;
 
 
 }
+
+
+
+////////// function random ////////////
 
 function generaterandomindex(){
 
