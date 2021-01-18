@@ -17,21 +17,25 @@ var usercounter = 0;
 var leftImageindex;
 var mediumImageindex;
 var rightImageindex;
+
+
 ////////// constructor ////////////////
 
 function voteimage(nameproduct, filepath){
 
 this.nameproduct = nameproduct;
 this.filepath = filepath;
-this.click = 0;
+this.clicks = 0;
 // this.timesshown = 0;
 
 voteimage.prototype.allimages.push(this);
 }
+
 //////////////////////////////////////
 
-///////////////////create object////////////////////
 voteimage.prototype.allimages = [];
+
+///////////////////create object////////////////////
 
 new voteimage('bag','img/bag.jpg');
 new voteimage('banana','img/banana.jpg');
@@ -55,7 +59,7 @@ new voteimage('water-can','img/water-can.jpg');
 new voteimage('wine-glass','img/wine-glass.jpg');
 
 //////////////////////////////////////////
-console.log(voteimage.prototype.allimages);
+
 
 //////////////////////////////////////////
 renderthreerandomimages();
@@ -73,15 +77,20 @@ usercounter++;
 
  if (usercounter <= maxclick){
      if(event.target.id === 'left-image'){
-        voteimage.prototype.allimages[leftImageindex].click++;
+        voteimage.prototype.allimages[leftImageindex].clicks++;
      }else{
-    voteimage.prototype.allimages[mediumImageindex].click++;
+    voteimage.prototype.allimages[mediumImageindex].clicks++;
 }
 if(event.target.id === 'medium-image'){
-voteimage.prototype.allimages[mediumImageindex].click++;   
+voteimage.prototype.allimages[mediumImageindex].clicks++;   
 }else{
-    voteimage.prototype.allimages[rightImageindex].click++;
+    voteimage.prototype.allimages[rightImageindex].clicks++;
 }
+if(event.target.id === 'right-image'){
+    voteimage.prototype.allimages[mediumImageindex].clicks++;   
+    }else{
+        voteimage.prototype.allimages[rightImageindex].clicks++;
+    }
 
 renderthreerandomimages();
 
@@ -92,7 +101,7 @@ var clicklist = document.getElementById('click-list');
 var clickres;
 for(var i = 0; i < voteimage.prototype.allimages.length; i++) {
  clickres = document.createElement('li');
- clickres.textContent = voteimage.prototype.allimages[i].nameproduct + 'was chosen ' + voteimage.prototype.allimages[i].click + 'times '; 
+ clickres.textContent = voteimage.prototype.allimages[i].nameproduct + 'was chosen ' + voteimage.prototype.allimages[i].clicks + 'times '; 
  clicklist.appendChild(clickres);
 }
 rightImageElement.removeEventListener('click',calcclick);
@@ -103,22 +112,16 @@ mediumImageElement.removeEventListener('click',calcclick);
 
 }
 
+///// function renderthreerandomimages ///////
 
 function renderthreerandomimages(){
-var leftImageindex;
-var mediumImageindex;
-var rightImageindex;
 leftImageindex = generaterandomindex();
-
-//////////////
 
 do{
 
     mediumImageindex = generaterandomindex();
     rightImageindex = generaterandomindex();
 }while(leftImageindex === mediumImageindex || leftImageindex === rightImageindex);
-
-//////////////
 
 leftImageElement.src = voteimage.prototype.allimages[leftImageindex].filepath;
 
@@ -140,7 +143,7 @@ return Math.floor(Math.random() * (voteimage.prototype.allimages.length));
 
 }
 
-
+////////////////////////////////////////
 
 
 
