@@ -20,8 +20,8 @@ var formofround = document.getElementById('formround');
 var leftImageindex;
 var mediumImageindex;
 var rightImageindex;
-
-
+var dataimg = [];
+var clicks = [];
 ////////// constructor ////////////////
 
 function voteimage(nameproduct, filepath){
@@ -30,7 +30,7 @@ this.nameproduct = nameproduct;
 this.filepath = filepath;
 this.clicks = 0;
 this.timesshown = 0;
-
+dataimg.push(nameproduct);
 voteimage.prototype.allimages.push(this);
 }
 
@@ -81,51 +81,54 @@ function calcclick (event){
 
 usercounter++;
 
- if (usercounter < maxclick){
+ if (usercounter <= maxclick){
      if(event.target.id === 'left-image'){
         voteimage.prototype.allimages[leftImageindex].clicks++;
      }else{
     voteimage.prototype.allimages[mediumImageindex].clicks++;
 }
-if(event.target.id === 'medium-image'){
-voteimage.prototype.allimages[mediumImageindex].clicks++;   
-}else{
-    voteimage.prototype.allimages[rightImageindex].clicks++;
-}
-if(event.target.id === 'right-image'){
-    voteimage.prototype.allimages[mediumImageindex].clicks++;   
-    }else{
-        voteimage.prototype.allimages[rightImageindex].clicks++;
-    }
+// if(event.target.id === 'medium-image'){
+// voteimage.prototype.allimages[mediumImageindex].clicks++;   
+// }else{
+//     voteimage.prototype.allimages[rightImageindex].clicks++;
+// }
+// if(event.target.id === 'right-image'){
+//     voteimage.prototype.allimages[mediumImageindex].clicks++;   
+//     }else{
+//         voteimage.prototype.allimages[rightImageindex].clicks++;
+//     }
 
 renderthreerandomimages();
 
-}
-
-else{
-
-rightImageElement.removeEventListener('click',calcclick);
-leftImageElement.removeEventListener('click',calcclick);
-mediumImageElement.removeEventListener('click',calcclick);
-showresuls.removeAttribute('disabled');
+} else {
 
 
+ rightImageElement.removeEventListener('click',calcclick);
+ leftImageElement.removeEventListener('click',calcclick);
+ mediumImageElement.removeEventListener('click',calcclick);
+ showresuls.removeAttribute('disabled');
+ ////////////////////////////////////
+ 
  }
 
-
+ 
 }
 
 
 ///////////// function res ////////////////
 
-function showresults(params) {
+function showresults() {
+
     var clicklist = document.getElementById('click-list');
 var clickres;
 for(var i = 0; i < voteimage.prototype.allimages.length; i++) {
  clickres = document.createElement('li');
  clickres.textContent = voteimage.prototype.allimages[i].nameproduct + ' was chosen ' + voteimage.prototype.allimages[i].clicks + ' and seen ' + voteimage.prototype.allimages[i].timesshown + ' times '; 
  clicklist.appendChild(clickres);
+ 
 }
+
+
 }
 
 
@@ -165,7 +168,7 @@ voteimage.prototype.allimages[rightImageindex].timesshown++;
 
 }
 
-
+// rendercharts();
 
 ////////// function random ////////////
 
@@ -180,9 +183,49 @@ return Math.floor(Math.random() * (voteimage.prototype.allimages.length));
 
 
 
+//////////////////// create chart ////////////////////
 
 
+////////////////////////////////////////
 
 
+// for(var i = 0; i < voteimage.prototype.allimages.length; i++){
+//     clicks.push(voteimage.prototype.allimages[i].click);
+// }
 
+    
+
+////////////////////////////////////////
+for(var i = 0; i < voteimage.prototype.allimages.length; i++){
+    clicks.push(voteimage.prototype.allimages[i].clicks);
+  }
+function rendercharts(){
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+    
+        // The data for our dataset
+        data: {
+            labels: dataimg,
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: 'rgb(300, 333, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: clicks
+            }]
+        },
+    
+        // Configuration options go here
+        options: {}
+    });
+    
+    // chart.config.data.datasets[0].data = clicks;
+}
+
+rendercharts();
+
+
+//////////////////////////////////////////////
 
