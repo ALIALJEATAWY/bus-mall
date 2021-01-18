@@ -26,7 +26,7 @@ function voteimage(nameproduct, filepath){
 this.nameproduct = nameproduct;
 this.filepath = filepath;
 this.clicks = 0;
-// this.timesshown = 0;
+this.timesshown = 0;
 
 voteimage.prototype.allimages.push(this);
 }
@@ -101,7 +101,7 @@ var clicklist = document.getElementById('click-list');
 var clickres;
 for(var i = 0; i < voteimage.prototype.allimages.length; i++) {
  clickres = document.createElement('li');
- clickres.textContent = voteimage.prototype.allimages[i].nameproduct + 'was chosen ' + voteimage.prototype.allimages[i].clicks + 'times '; 
+ clickres.textContent = voteimage.prototype.allimages[i].nameproduct + ' was chosen ' + voteimage.prototype.allimages[i].clicks + ' and seen ' + voteimage.prototype.allimages[i].timesshown + ' times '; 
  clicklist.appendChild(clickres);
 }
 rightImageElement.removeEventListener('click',calcclick);
@@ -124,11 +124,12 @@ do{
 }while(leftImageindex === mediumImageindex || leftImageindex === rightImageindex);
 
 leftImageElement.src = voteimage.prototype.allimages[leftImageindex].filepath;
+voteimage.prototype.allimages[leftImageindex].timesshown++;
 
 mediumImageElement.src = voteimage.prototype.allimages[mediumImageindex].filepath;
-
+voteimage.prototype.allimages[mediumImageindex].timesshown++;
 rightImageElement.src = voteimage.prototype.allimages[rightImageindex].filepath;
-
+voteimage.prototype.allimages[rightImageindex].timesshown++;
 
 }
 
