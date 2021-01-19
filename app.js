@@ -30,8 +30,8 @@ var rightImageindex;
 
 
 var dataimg = [];
-var clicks = [];
 
+var timesshown = [];
 
 ////////// constructor ////////////////
 
@@ -130,18 +130,25 @@ renderthreerandomimages();
 
 function showresults() {
 
+    viewlist();
+    rendercharts();
+
+
+
+}
+
+
+function viewlist(){
     var clicklist = document.getElementById('click-list');
-var clickres;
-for(var i = 0; i < voteimage.prototype.allimages.length; i++) {
- clickres = document.createElement('li');
- clickres.textContent = voteimage.prototype.allimages[i].nameproduct + ' was chosen ' + voteimage.prototype.allimages[i].clicks + ' and seen ' + voteimage.prototype.allimages[i].timesshown + ' times '; 
- clicklist.appendChild(clickres);
- 
+    var clickres;
+    for(var i = 0; i < voteimage.prototype.allimages.length; i++) {
+     clickres = document.createElement('li');
+     clickres.textContent = voteimage.prototype.allimages[i].nameproduct + ' was chosen ' + voteimage.prototype.allimages[i].clicks + ' and seen ' + voteimage.prototype.allimages[i].timesshown + ' times '; 
+     clicklist.appendChild(clickres);
+     
+    }
+
 }
-
-
-}
-
 
 /////////////// function number form /////////////
 
@@ -197,7 +204,7 @@ voteimage.prototype.allimages[rightImageindex].timesshown++;
 
 }
 
-// rendercharts();
+
 
 ////////// function random ////////////
 
@@ -217,35 +224,56 @@ return Math.floor(Math.random() * (voteimage.prototype.allimages.length));
 //     clicks.push(voteimage.prototype.allimages[i].click);
 // }
 ////////////////////////////////////////
-for(var i = 0; i < voteimage.prototype.allimages.length; i++){
-    clicks.push(voteimage.prototype.allimages[i].clicks);
-  }
-function rendercharts(){
 
+function rendercharts(){
+var votesarray = [];
+var timesshownarray = [];
+for(var i = 0; i < voteimage.prototype.allimages.length; i++){
+    votesarray.push(voteimage.prototype.allimages[i].clicks);
+    timesshownarray.push(voteimage.prototype.allimages[i].timesshown);
+  }
     var ctx = document.getElementById('myChart').getContext('2d');
     var chart = new Chart(ctx, {
         // The type of chart we want to create
-        type: 'line',
+        type: 'bar',
     
         // The data for our dataset
         data: {
             labels: dataimg,
             datasets: [{
-                label: 'My First dataset',
+                label: 'votes',
                 backgroundColor: 'rgb(300, 333, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: clicks
+                data: votesarray
+            }, {
+                label: 'votes',
+                backgroundColor: 'rgb(0, 3, 10)',
+                borderColor: 'rgb(255, 0, 0)',
+                data: timesshownarray
             }]
         },
     
         // Configuration options go here
-        options: {}
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        max: 15, 
+                        min: 0,
+                        beginAtZero: true
+                        
+                    }
+                }]
+            }
+        }
     });
-    
+
+    // chart.canvas.parentNode.style.width = '70%';
+    // chart.canvas.parentNode.style.height = '300px';
     // chart.config.data.datasets[0].data = clicks;
 }
 
-rendercharts();
+
 
 
 //////////////////////////////////////////////
