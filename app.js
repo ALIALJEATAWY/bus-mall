@@ -5,6 +5,12 @@
 /////////////////// global ////////////////////////
 
 
+var usedimglift = -1;
+var usedimgmedium = -1;
+var usedimgright = -1;
+
+
+
 var leftImageElement = document.getElementById('left-image');
 
 var mediumImageElement = document.getElementById('medium-image');
@@ -13,15 +19,20 @@ var rightImageElement = document.getElementById('right-image');
 
 var maxclick = 25; 
 var usercounter = 0;
-var showresuls = document.getElementById('showres');
 
+
+var showresuls = document.getElementById('showres');
 var formofround = document.getElementById('formround');
 
 var leftImageindex;
 var mediumImageindex;
 var rightImageindex;
+
+
 var dataimg = [];
 var clicks = [];
+
+
 ////////// constructor ////////////////
 
 function voteimage(nameproduct, filepath){
@@ -150,19 +161,37 @@ function setuserrounds(event){
 ///// function renderthreerandomimages ///////
 
 function renderthreerandomimages(){
-leftImageindex = generaterandomindex();
+var pastimgs = [usedimglift,usedimgmedium,usedimgright];
+
 
 do{
+    leftImageindex = generaterandomindex();
 
+}while(pastimgs.includes(leftImageindex));
+usedimglift = leftImageindex;
+pastimgs.push(leftImageindex);
+
+
+do{
     mediumImageindex = generaterandomindex();
+
+}while(pastimgs.includes(mediumImageindex));
+usedimgmedium = mediumImageindex;
+pastimgs.push(mediumImageindex);
+
+
+do{
     rightImageindex = generaterandomindex();
-}while(leftImageindex === mediumImageindex || leftImageindex === rightImageindex);
+}while(pastimgs.includes(rightImageindex));
+usedimgright = rightImageindex;
+
 
 leftImageElement.src = voteimage.prototype.allimages[leftImageindex].filepath;
 voteimage.prototype.allimages[leftImageindex].timesshown++;
 
 mediumImageElement.src = voteimage.prototype.allimages[mediumImageindex].filepath;
 voteimage.prototype.allimages[mediumImageindex].timesshown++;
+
 rightImageElement.src = voteimage.prototype.allimages[rightImageindex].filepath;
 voteimage.prototype.allimages[rightImageindex].timesshown++;
 
@@ -182,19 +211,11 @@ return Math.floor(Math.random() * (voteimage.prototype.allimages.length));
 ////////////////////////////////////////
 
 
-
 //////////////////// create chart ////////////////////
-
-
-////////////////////////////////////////
-
 
 // for(var i = 0; i < voteimage.prototype.allimages.length; i++){
 //     clicks.push(voteimage.prototype.allimages[i].click);
 // }
-
-    
-
 ////////////////////////////////////////
 for(var i = 0; i < voteimage.prototype.allimages.length; i++){
     clicks.push(voteimage.prototype.allimages[i].clicks);
