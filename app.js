@@ -81,22 +81,22 @@ function calcclick (event){
 
 usercounter++;
 
- if (usercounter < maxclick){
+ if (usercounter <= maxclick){
      if(event.target.id === 'left-image'){
         voteimage.prototype.allimages[leftImageindex].clicks++;
      }else{
     voteimage.prototype.allimages[mediumImageindex].clicks++;
 }
-if(event.target.id === 'medium-image'){
-voteimage.prototype.allimages[mediumImageindex].clicks++;   
-}else{
-    voteimage.prototype.allimages[rightImageindex].clicks++;
-}
-if(event.target.id === 'right-image'){
-    voteimage.prototype.allimages[mediumImageindex].clicks++;   
-    }else{
-        voteimage.prototype.allimages[rightImageindex].clicks++;
-    }
+// if(event.target.id === 'medium-image'){
+// voteimage.prototype.allimages[mediumImageindex].clicks++;   
+// }else{
+//     voteimage.prototype.allimages[rightImageindex].clicks++;
+// }
+// if(event.target.id === 'right-image'){
+//     voteimage.prototype.allimages[mediumImageindex].clicks++;   
+//     }else{
+//         voteimage.prototype.allimages[rightImageindex].clicks++;
+//     }
 
 renderthreerandomimages();
 
