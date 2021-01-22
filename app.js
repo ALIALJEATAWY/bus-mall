@@ -32,6 +32,19 @@ var rightImageindex;
 var dataimg = [];
 
 var timesshown = [];
+voteimage.prototype.allimages = [];
+///////////////////////////////////////
+if(localStorage.getItem('storevote')){
+    var storarray = JSON.parse(localStorage.getItem('storevote'));
+
+    for(var i =0; i < storarray.length; i++){
+        var stordata = new voteimage (storarray[i].nameproduct, storarray[i].filepath, storarray[i].clicks, storarray[i].timesshown);
+
+        
+        
+    }
+}
+
 
 ////////// constructor ////////////////
 
@@ -47,7 +60,7 @@ voteimage.prototype.allimages.push(this);
 
 //////////////////////////////////////
 
-voteimage.prototype.allimages = [];
+
 
 ///////////////////create object////////////////////
 
@@ -109,6 +122,8 @@ usercounter++;
 //         voteimage.prototype.allimages[rightImageindex].clicks++;
 //     }
 
+
+ 
 renderthreerandomimages();
 
 } else {
@@ -119,10 +134,9 @@ renderthreerandomimages();
  mediumImageElement.removeEventListener('click',calcclick);
  showresuls.removeAttribute('disabled');
  ////////////////////////////////////
- 
+ localStorage.setItem('storevote', JSON.stringify(voteimage.prototype.allimages));
  }
-
- 
+  
 }
 
 
@@ -130,6 +144,20 @@ renderthreerandomimages();
 
 function showresults() {
 
+
+    //// localstorage ////////
+   
+    //////////////////////////
+    // function savedata() {
+
+    //     var store = JSON.stringify(voteimage.prototype.allimages);
+
+    //     localStorage.setItem('data', store);
+        
+    //  }
+    //  savedata();
+      
+   
     viewlist();
     rendercharts();
 
@@ -137,7 +165,7 @@ function showresults() {
 
 }
 
-
+// getdata();
 function viewlist(){
     var clicklist = document.getElementById('click-list');
     var clickres;
@@ -145,6 +173,7 @@ function viewlist(){
      clickres = document.createElement('li');
      clickres.textContent = voteimage.prototype.allimages[i].nameproduct + ' was chosen ' + voteimage.prototype.allimages[i].clicks + ' and seen ' + voteimage.prototype.allimages[i].timesshown + ' times '; 
      clicklist.appendChild(clickres);
+     
      
     }
 
@@ -246,7 +275,7 @@ for(var i = 0; i < voteimage.prototype.allimages.length; i++){
                 borderColor: 'rgb(255, 99, 132)',
                 data: votesarray
             }, {
-                label: 'votes',
+                label: 'view',
                 backgroundColor: 'rgb(0, 3, 10)',
                 borderColor: 'rgb(255, 0, 0)',
                 data: timesshownarray
@@ -268,13 +297,21 @@ for(var i = 0; i < voteimage.prototype.allimages.length; i++){
         }
     });
 
-    // chart.canvas.parentNode.style.width = '70%';
-    // chart.canvas.parentNode.style.height = '300px';
+    chart.canvas.parentNode.style.width = '80%';
+    chart.canvas.parentNode.style.height = '300px';
     // chart.config.data.datasets[0].data = clicks;
 }
 
 
 
+// function getdata(){
+//     var store = localStorage.getItem('data');
+//     data = JSON.parse(store);
+//     if (!data){
+//         data = [];
+//     }
+// }
+// getdata();
 
 //////////////////////////////////////////////
 

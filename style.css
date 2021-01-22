@@ -4,8 +4,14 @@ html {
   margin: 0;
   background-color: #f6f4f3;
 }
-
-
+body{
+  height: 3000px;
+  margin: 0;
+  padding: 0;
+}
+main{
+  height: 100%;
+}
 header {
    
     background: linear-gradient(
@@ -43,7 +49,9 @@ header {
    position: absolute;
    top: 70px;
    left: 250px;
-}  
+} 
+
+
 .p3{
     font-family: 'Coda Caption', sans-serif;
     text-align: center;
@@ -54,19 +62,119 @@ header {
    top: 150px;
    left: 250px;
 }  
+.ul1{
+  position: absolute;
+  top: 320px;
+  right: 20px;
+  
+  float: right;
+}
+.h1{
+  text-align: center;
+   background-color: rgb(250, 58, 58);
+  border: rgb(92, 0, 0);
+  padding: 10px;
+  margin: 5px;
+}
+.h3{
+  text-align: center;
+   background-color: rgb(250, 58, 58);
+  border: rgb(92, 0, 0);
+  padding: 10px;
+  margin: 5px;
+}
+.h2{
+  text-align: center;
+   background-color: rgb(250, 58, 58);
+  border: rgb(92, 0, 0);
+  padding: 10px;
+  margin: 5px;
+}
+.div2{
+  background-color: rgb(92, 0, 0);
+  padding: 0.5px;
+  margin: 10px;
+  margin-right: 130px;
+}
+.nav1 li{
+  
+  
+  color: rgb(255, 255, 255);
+  background-color: rgb(250, 58, 58);
+  border: rgb(92, 0, 0);
+  padding: 10px;
+  float: left;
+  margin: 20px;
+  display: block;
+}
 
-
-
-
+.div1{
+  position: absolute;
+  top: 700px;
+  right: 10px;
+}
 img{
    margin: 10px;
     height: 250px;
-    margin-left: 100px;
+    
 
 }
 
+.div2{
+float: right;
+}
+.style{
+  
+    margin: 0 auto;
+    width: 25%;
+    border-radius: 10px;
+    background-color: rgb(92, 0, 0);
+    padding: 20px;
+    position: absolute;
+    top: 420px;
+    right: 35%;
+}
+.labelstyle{
+  text-align: center;
+  display: block;
+  color: rgb(255, 255, 255);
+  
+}
 
+.input1{
+  width: 100%;
+  padding: 10px 10px;
+  margin: 15px 0;
+  display: block;
+  border: 1px solid rgb(92, 0, 0);
+  border-radius: 7px;
+  box-sizing: border-box;
+}
+.a2{
+  display: block;
+  border-radius: 4px;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 10px 10px;
+  color: rgb(92, 0, 0);
+  margin: auto;
+  
+ 
+}
 
+.input2{
+  
+  display: block;
+  border-radius: 4px;
+  width: 50%;
+  background-color: #ffffff;
+  padding: 10px 10px;
+  color: rgb(92, 0, 0);
+  margin: auto;
+ 
+  
+  
+}
 #left-image{
     border: brown;
     padding: 10px;
@@ -92,6 +200,14 @@ img{
 }
 
 
+.list{
+  position: absolute;
+  top: 1200px;
+}
+.list1{
+  position: absolute;
+  top: 2500px;
+}
 
 footer{
     background: linear-gradient(
@@ -100,5 +216,13 @@ footer{
       rgb(0, 0, 0) 100%
     );
     width: 100%;
-    height:80px;
+    height:140px;
+    position: relative;
+    bottom: 0;
+}
+.a1{
+  height: 100px;
+  position: absolute;
+  right:450px;
+  top: 10px;
 }
